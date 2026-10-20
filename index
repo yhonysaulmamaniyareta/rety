@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cuenco Lleno | Comida para perros y gatos</title>
+<meta name="description" content="Alimento balanceado, snacks y accesorios para perros y gatos. Pide online y recibe en casa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bosque:#143d33;
+    --bosque-2:#1f5547;
+    --menta:#eaf3ee;
+    --hueso:#f7faf8;
+    --mantequilla:#ffc83d;
+    --mantequilla-2:#ffe08a;
+    --cielo:#cfe6f2;
+    --tinta:#14231f;
+    --suave:#5b6d66;
+    --linea:#d6e3dc;
+    --radio:18px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth}
+  body{font-family:'Figtree',system-ui,sans-serif;background:var(--hueso);color:var(--tinta);line-height:1.6;font-size:17px}
+  h1,h2,h3{font-family:'Bricolage Grotesque',sans-serif;line-height:1.08;letter-spacing:-.02em}
+  a{color:inherit}
+  img,svg{display:block;max-width:100%}
+  :focus-visible{outline:3px solid var(--mantequilla);outline-offset:3px;border-radius:6px}
+  .wrap{width:min(1120px,100% - 40px);margin-inline:auto}
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;border:0;cursor:pointer;font:600 1rem 'Figtree',sans-serif;padding:.85rem 1.4rem;border-radius:999px;text-decoration:none;transition:transform .15s,background .15s}
+  .btn:active{transform:scale(.97)}
+  .btn-primario{background:var(--mantequilla);color:var(--bosque)}
+  .btn-primario:hover{background:var(--mantequilla-2)}
+  .btn-oscuro{background:var(--bosque);color:#fff}
+  .btn-oscuro:hover{background:var(--bosque-2)}
+  .btn-borde{background:transparent;color:var(--bosque);box-shadow:inset 0 0 0 2px var(--bosque)}
+  .btn-borde:hover{background:var(--menta)}
+
+  /* Cabecera */
+  header{position:sticky;top:0;z-index:20;background:rgba(247,250,248,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--linea)}
+  .nav{display:flex;align-items:center;justify-content:space-between;height:68px;gap:1rem}
+  .logo{font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:1.35rem;text-decoration:none;color:var(--bosque);display:flex;align-items:center;gap:.5rem}
+  .nav ul{display:flex;gap:1.6rem;list-style:none}
+  .nav ul a{text-decoration:none;font-weight:500;color:var(--suave)}
+  .nav ul a:hover{color:var(--bosque)}
+  .carrito-btn{position:relative;background:var(--bosque);color:#fff;border:0;border-radius:999px;padding:.55rem 1.1rem;font:600 .95rem 'Figtree',sans-serif;cursor:pointer;display:flex;align-items:center;gap:.5rem}
+  .carrito-btn span{background:var(--mantequilla);color:var(--bosque);border-radius:999px;min-width:22px;height:22px;display:grid;place-items:center;font-size:.8rem;padding:0 6px}
+
+  /* Hero */
+  .hero{background:var(--bosque);color:#fff;overflow:hidden}
+  .hero .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:2rem;align-items:center;padding-block:clamp(3rem,7vw,6rem)}
+  .hero h1{font-size:clamp(2.5rem,6vw,4.6rem);font-weight:800}
+  .hero p{margin-top:1.3rem;max-width:46ch;color:#cfe3da;font-size:1.12rem}
+  .hero .acciones{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem}
+  .hero .btn-borde{color:#fff;box-shadow:inset 0 0 0 2px #ffffff80}
+  .hero .btn-borde:hover{background:#ffffff1a}
+  .hero-nota{margin-top:1.6rem;font-size:.95rem;color:#a9c8bb}
+  .cuenco{width:100%;max-width:460px;margin-inline:auto}
+  .cuenco .croqueta{transform-box:fill-box;transform-origin:center;animation:caer .7s cubic-bezier(.3,1.4,.5,1) both}
+  @keyframes caer{from{transform:translateY(-220px) rotate(-90deg);opacity:0}to{transform:none;opacity:1}}
+
+  /* Secciones */
+  section{padding-block:clamp(3rem,7vw,5.5rem)}
+  .titulo{max-width:40rem;margin-bottom:2rem}
+  .titulo h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:700}
+  .titulo p{margin-top:.7rem;color:var(--suave)}
+
+  /* Filtros */
+  .filtros{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:1.8rem}
+  .filtros button{font:600 .95rem 'Figtree',sans-serif;border:2px solid var(--linea);background:#fff;color:var(--bosque);padding:.5rem 1.1rem;border-radius:999px;cursor:pointer}
+  .filtros button[aria-pressed="true"]{background:var(--bosque);border-color:var(--bosque);color:#fff}
+
+  /* Productos */
+  .grilla{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.4rem}
+  .producto{background:#fff;border:1px solid var(--linea);border-radius:var(--radio);padding:1rem 1rem 1.2rem;display:flex;flex-direction:column}
+  .producto .foto{background:var(--menta);border-radius:14px;aspect-ratio:1/1;display:grid;place-items:center;margin-bottom:1rem}
+  .producto .foto svg{width:68%}
+  .producto h3{font-size:1.2rem;font-weight:700}
+  .producto .desc{font-size:.93rem;color:var(--suave);margin:.3rem 0 .9rem;flex:1}
+  .producto .pie{display:flex;align-items:center;justify-content:space-between;gap:.5rem}
+  .precio{font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:1.3rem}
+  .precio small{display:block;font:400 .78rem 'Figtree',sans-serif;color:var(--suave)}
+  .producto .btn{padding:.6rem 1.1rem;font-size:.93rem}
+
+  /* Por qué elegirnos */
+  .porque{background:var(--cielo)}
+  .porque-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem}
+  .porque h3{font-size:1.35rem;margin-bottom:.5rem;color:var(--bosque)}
+  .porque p{color:#2c4a44}
+
+  /* Contacto */
+  .contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
+  form{display:grid;gap:1rem}
+  label{font-weight:600;font-size:.95rem;display:grid;gap:.35rem}
+  input,select,textarea{font:inherit;padding:.8rem 1rem;border:2px solid var(--linea);border-radius:12px;background:#fff;color:var(--tinta)}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--bosque)}
+  textarea{min-height:110px;resize:vertical}
+  .datos p{margin-bottom:.8rem}
+  .datos strong{display:block;font-family:'Bricolage Grotesque',sans-serif;font-size:1.1rem}
+  #estado-form{font-weight:600;color:var(--bosque-2);min-height:1.5em}
+
+  footer{background:var(--bosque);color:#a9c8bb;padding-block:2rem;font-size:.92rem}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1rem}
+
+  /* Carrito lateral */
+  .fondo{position:fixed;inset:0;background:#0008;opacity:0;pointer-events:none;transition:opacity .25s;z-index:30}
+  .fondo.abierto{opacity:1;pointer-events:auto}
+  aside.panel{position:fixed;top:0;right:0;height:100%;width:min(420px,100%);background:#fff;z-index:40;transform:translateX(100%);transition:transform .3s;display:flex;flex-direction:column;box-shadow:-10px 0 40px #0003}
+  aside.panel.abierto{transform:none}
+  .panel-cab{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 1.4rem;border-bottom:1px solid var(--linea)}
+  .panel-cab h2{font-size:1.4rem}
+  .cerrar{background:none;border:0;font-size:1.8rem;cursor:pointer;line-height:1;color:var(--bosque)}
+  .panel-lista{flex:1;overflow:auto;padding:1rem 1.4rem}
+  .vacio{color:var(--suave);padding:2rem 0;text-align:center}
+  .item{display:grid;grid-template-columns:1fr auto;gap:.3rem 1rem;padding:.9rem 0;border-bottom:1px solid var(--linea)}
+  .item b{font-weight:600}
+  .item .sub{color:var(--suave);font-size:.9rem}
+  .cant{display:flex;align-items:center;gap:.5rem;grid-column:1/-1}
+  .cant button{width:32px;height:32px;border-radius:50%;border:2px solid var(--linea);background:#fff;font-size:1.1rem;cursor:pointer;color:var(--bosque)}
+  .cant .quitar{width:auto;border-radius:999px;padding:0 .8rem;margin-left:auto;font-size:.85rem;font-family:'Figtree',sans-serif}
+  .panel-pie{padding:1.2rem 1.4rem;border-top:1px solid var(--linea);display:grid;gap:.9rem}
+  .total{display:flex;justify-content:space-between;font-family:'Bricolage Grotesque',sans-serif;font-size:1.4rem;font-weight:700}
+
+  @media (max-width:820px){
+    .nav ul{display:none}
+    .hero .wrap{grid-template-columns:1fr}
+    .cuenco{max-width:320px;order:-1}
+    .porque-grid,.contacto-grid{grid-template-columns:1fr}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap nav">
+    <a class="logo" href="#inicio" aria-label="Cuenco Lleno, inicio">
+      <svg width="30" height="30" viewBox="0 0 30 30" aria-hidden="true"><path d="M3 13h24c0 8-5 13-12 13S3 21 3 13z" fill="#143d33"/><circle cx="10" cy="9" r="3" fill="#ffc83d"/><circle cx="16" cy="7" r="3" fill="#ffc83d"/><circle cx="21" cy="10" r="3" fill="#ffc83d"/></svg>
+      Cuenco Lleno
+    </a>
+    <ul>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="#porque">Por qué elegirnos</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <button class="carrito-btn" id="abrir-carrito" aria-label="Abrir carrito">Carrito <span id="contador">0</span></button>
+  </div>
+</header>
+
+<main id="inicio">
+  <div class="hero">
+    <div class="wrap">
+      <div>
+        <h1>Comida de verdad para quien te espera en la puerta</h1>
+        <p>Alimento balanceado, snacks y premios para perros y gatos. Elige por edad, tamaño y necesidad, y lo llevamos a tu casa.</p>
+        <div class="acciones">
+          <a class="btn btn-primario" href="#productos">Ver productos</a>
+          <a class="btn btn-borde" href="#contacto">Pedir asesoría</a>
+        </div>
+        <p class="hero-nota">Envío gratis en compras desde S/ 120.</p>
+      </div>
+      <svg class="cuenco" viewBox="0 0 400 340" role="img" aria-label="Cuenco lleno de croquetas">
+        <ellipse cx="200" cy="312" rx="150" ry="14" fill="#0d2a23"/>
+        <g id="croquetas"></g>
+        <path d="M40 170h320c0 90-60 140-160 140S40 260 40 170z" fill="#ffc83d"/>
+        <path d="M40 170h320c0 14-2 26-5 38H45c-3-12-5-24-5-38z" fill="#ffe08a"/>
+        <circle cx="200" cy="250" r="26" fill="#143d33"/>
+        <circle cx="178" cy="228" r="8" fill="#143d33"/><circle cx="200" cy="222" r="8" fill="#143d33"/><circle cx="222" cy="228" r="8" fill="#143d33"/><circle cx="238" cy="240" r="7" fill="#143d33"/>
+      </svg>
+    </div>
+  </div>
+
+  <section id="productos">
+    <div class="wrap">
+      <div class="titulo">
+        <h2>Lo que más se llevan nuestros clientes</h2>
+        <p>Todos los precios incluyen IGV. Si dudas qué le conviene a tu mascota, escríbenos.</p>
+      </div>
+      <div class="filtros" role="group" aria-label="Filtrar productos">
+        <button data-f="todos" aria-pressed="true">Todo</button>
+        <button data-f="perro" aria-pressed="false">Perros</button>
+        <button data-f="gato" aria-pressed="false">Gatos</button>
+        <button data-f="snack" aria-pressed="false">Snacks</button>
+      </div>
+      <div class="grilla" id="grilla"></div>
+    </div>
+  </section>
+
+  <section class="porque" id="porque">
+    <div class="wrap">
+      <div class="titulo"><h2>Elegimos cada marca como si fuera para la nuestra</h2></div>
+      <div class="porque-grid">
+        <div><h3>Ingredientes claros</h3><p>Revisamos la etiqueta de cada producto. Si el primer ingrediente no es proteína real, no entra a la tienda.</p></div>
+        <div><h3>Entrega en 24 a 48 horas</h3><p>Pedidos confirmados antes de las 3 p.m. salen el mismo día. Pagas contra entrega o por transferencia.</p></div>
+        <div><h3>Asesoría sin costo</h3><p>Cuéntanos la edad, el peso y las alergias de tu mascota y te recomendamos el alimento adecuado.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contacto">
+    <div class="wrap contacto-grid">
+      <div>
+        <div class="titulo"><h2>Cuéntanos de tu mascota</h2><p>Te respondemos el mismo día en horario de atención.</p></div>
+        <form id="form-contacto">
+          <label>Tu nombre<input name="nombre" required autocomplete="name"></label>
+          <label>Teléfono o WhatsApp<input name="telefono" type="tel" required autocomplete="tel"></label>
+          <label>Tu mascota es
+            <select name="tipo"><option>Perro</option><option>Gato</option><option>Otro</option></select>
+          </label>
+          <label>¿En qué te ayudamos?<textarea name="mensaje" required placeholder="Ej.: mi perro de 3 años es alérgico al pollo"></textarea></label>
+          <button class="btn btn-oscuro" type="submit">Enviar consulta</button>
+          <p id="estado-form" role="status"></p>
+        </form>
+      </div>
+      <div class="datos">
+        <div class="titulo"><h2>Visítanos</h2></div>
+        <p><strong>Dirección</strong>Av. Principal 123, tu ciudad</p>
+        <p><strong>Horario</strong>Lunes a sábado, 9 a.m. a 7 p.m.</p>
+        <p><strong>WhatsApp</strong>+51 999 999 999</p>
+        <p><strong>Correo</strong>hola@cuencolleno.pe</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© 2026 Cuenco Lleno. Todos los derechos reservados.</span>
+    <span>Hecho con cariño para perros y gatos.</span>
+  </div>
+</footer>
+
+<div class="fondo" id="fondo"></div>
+<aside class="panel" id="panel" aria-label="Carrito de compras" aria-hidden="true">
+  <div class="panel-cab"><h2>Tu carrito</h2><button class="cerrar" id="cerrar-carrito" aria-label="Cerrar carrito">×</button></div>
+  <div class="panel-lista" id="lista"></div>
+  <div class="panel-pie">
+    <div class="total"><span>Total</span><span id="total">S/ 0.00</span></div>
+    <a class="btn btn-primario" id="pedir" href="#" target="_blank" rel="noopener">Enviar pedido por WhatsApp</a>
+  </div>
+</aside>
+
+<script>
+  // ====== CONFIGURACIÓN: cambia estos datos por los de tu tienda ======
+  const WHATSAPP = "51999999999"; // número con código de país, sin + ni espacios
+  const MONEDA = "S/";
+
+  // ====== PRODUCTOS: edita, agrega o quita los que necesites ======
+  const productos = [
+    {id:1, nombre:"Adulto Pollo y Arroz", cat:"perro", peso:"15 kg", precio:189, color:"#e9b44c", desc:"Alimento completo para perros adultos de razas medianas y grandes."},
+    {id:2, nombre:"Cachorro Crecimiento", cat:"perro", peso:"8 kg", precio:129, color:"#7fb7d6", desc:"Con DHA y calcio para huesos fuertes y un buen desarrollo."},
+    {id:3, nombre:"Razas Pequeñas", cat:"perro", peso:"3 kg", precio:69, color:"#e07a5f", desc:"Croquetas pequeñas, fáciles de masticar, con salmón y avena."},
+    {id:4, nombre:"Gato Adulto Atún", cat:"gato", peso:"7.5 kg", precio:149, color:"#5fa8a0", desc:"Con taurina y fibras para el cuidado del pelo y la digestión."},
+    {id:5, nombre:"Gatito Leche y Pollo", cat:"gato", peso:"2 kg", precio:59, color:"#b79ad6", desc:"Alta energía para gatitos de 2 a 12 meses."},
+    {id:6, nombre:"Gato Esterilizado", cat:"gato", peso:"3 kg", precio:85, color:"#8fc16b", desc:"Menos grasa y más proteína para mantener el peso ideal."},
+    {id:7, nombre:"Galletas de Avena", cat:"snack", peso:"400 g", precio:24, color:"#d9a066", desc:"Premios crocantes para entrenar sin pasarte de calorías."},
+    {id:8, nombre:"Snack Dental", cat:"snack", peso:"7 unidades", precio:32, color:"#6bb89a", desc:"Ayuda a reducir el sarro mientras tu perro lo disfruta."}
+  ];
+
+  const $ = s => document.querySelector(s);
+  const fmt = n => `${MONEDA} ${n.toFixed(2)}`;
+  let filtro = "todos";
+  let carrito = [];
+  try { carrito = JSON.parse(localStorage.getItem("cuenco-carrito")) || []; } catch(e) {}
+
+  // Bolsa de alimento (SVG) con el color de cada producto
+  const bolsa = (c) => `
+    <svg viewBox="0 0 120 150" aria-hidden="true">
+      <path d="M22 18c14 6 62 6 76 0l8 118c-20 10-72 10-92 0z" fill="${c}"/>
+      <path d="M22 18c14 6 62 6 76 0" fill="none" stroke="#14372e33" stroke-width="3" stroke-dasharray="4 4"/>
+      <circle cx="60" cy="74" r="26" fill="#fff"/>
+      <circle cx="50" cy="66" r="6" fill="#143d33"/><circle cx="62" cy="62" r="6" fill="#143d33"/><circle cx="72" cy="70" r="6" fill="#143d33"/>
+      <path d="M46 82c8 8 20 8 28 0" stroke="#143d33" stroke-width="4" fill="none" stroke-linecap="round"/>
+    </svg>`;
+
+  function pintarProductos(){
+    const lista = productos.filter(p => filtro === "todos" || p.cat === filtro);
+    $("#grilla").innerHTML = lista.map(p => `
+      <article class="producto">
+        <div class="foto">${bolsa(p.color)}</div>
+        <h3>${p.nombre}</h3>
+        <p class="desc">${p.desc}</p>
+        <div class="pie">
+          <div class="precio">${fmt(p.precio)}<small>Bolsa de ${p.peso}</small></div>
+          <button class="btn btn-oscuro" data-add="${p.id}">Agregar</button>
+        </div>
+      </article>`).join("");
+  }
+
+  function guardar(){ try { localStorage.setItem("cuenco-carrito", JSON.stringify(carrito)); } catch(e) {} }
+
+  function pintarCarrito(){
+    const cant = carrito.reduce((a,i) => a + i.cant, 0);
+    $("#contador").textContent = cant;
+    if(!carrito.length){
+      $("#lista").innerHTML = '<p class="vacio">Tu carrito está vacío. Agrega un producto para empezar.</p>';
+      $("#total").textContent = fmt(0);
+      $("#pedir").style.display = "none";
+      return;
+    }
+    $("#pedir").style.display = "";
+    let total = 0, texto = [];
+    $("#lista").innerHTML = carrito.map(i => {
+      const p = productos.find(x => x.id === i.id);
+      const sub = p.precio * i.cant; total += sub;
+      texto.push(`${i.cant} x ${p.nombre} (${p.peso}) - ${fmt(sub)}`);
+      return `<div class="item">
+        <b>${p.nombre}</b><b>${fmt(sub)}</b>
+        <span class="sub">${p.peso} · ${fmt(p.precio)} c/u</span><span></span>
+        <div class="cant">
+          <button data-menos="${p.id}" aria-label="Quitar uno">−</button>
+          <span>${i.cant}</span>
+          <button data-mas="${p.id}" aria-label="Agregar uno">+</button>
+          <button class="quitar" data-quitar="${p.id}">Eliminar</button>
+        </div></div>`;
+    }).join("");
+    $("#total").textContent = fmt(total);
+    const msg = `Hola, quiero hacer este pedido:\n${texto.join("\n")}\nTotal: ${fmt(total)}`;
+    $("#pedir").href = `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+  }
+
+  function abrir(v){
+    $("#panel").classList.toggle("abierto", v);
+    $("#fondo").classList.toggle("abierto", v);
+    $("#panel").setAttribute("aria-hidden", String(!v));
+    if(v) $("#cerrar-carrito").focus(); else $("#abrir-carrito").focus();
+  }
+
+  // Eventos
+  document.addEventListener("click", e => {
+    const t = e.target;
+    if(t.dataset.add){
+      const id = +t.dataset.add, it = carrito.find(i => i.id === id);
+      it ? it.cant++ : carrito.push({id, cant:1});
+      guardar(); pintarCarrito(); abrir(true);
+    }
+    if(t.dataset.mas){ carrito.find(i => i.id === +t.dataset.mas).cant++; guardar(); pintarCarrito(); }
+    if(t.dataset.menos){
+      const it = carrito.find(i => i.id === +t.dataset.menos);
+      it.cant--; if(it.cant <= 0) carrito = carrito.filter(i => i !== it);
+      guardar(); pintarCarrito();
+    }
+    if(t.dataset.quitar){ carrito = carrito.filter(i => i.id !== +t.dataset.quitar); guardar(); pintarCarrito(); }
+    if(t.dataset.f){
+      filtro = t.dataset.f;
+      document.querySelectorAll(".filtros button").forEach(b => b.setAttribute("aria-pressed", String(b === t)));
+      pintarProductos();
+    }
+  });
+  $("#abrir-carrito").addEventListener("click", () => abrir(true));
+  $("#cerrar-carrito").addEventListener("click", () => abrir(false));
+  $("#fondo").addEventListener("click", () => abrir(false));
+  document.addEventListener("keydown", e => { if(e.key === "Escape") abrir(false); });
+
+  // Formulario: abre WhatsApp con la consulta
+  $("#form-contacto").addEventListener("submit", e => {
+    e.preventDefault();
+    const d = new FormData(e.target);
+    const msg = `Hola, soy ${d.get("nombre")} (${d.get("telefono")}). Mi mascota es: ${d.get("tipo")}.\n${d.get("mensaje")}`;
+    window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`, "_blank");
+    $("#estado-form").textContent = "Listo, se abrió WhatsApp con tu consulta.";
+    e.target.reset();
+  });
+
+  // Hero: croquetas que caen al cuenco al cargar la página
+  (function(){
+    const g = document.getElementById("croquetas");
+    const colores = ["#c98a3c","#b5762b","#d89b4a","#a8651f"];
+    let html = "";
+    for(let i = 0; i < 26; i++){
+      const fila = Math.floor(i / 9);
+      const x = 80 + (i % 9) * 30 + (fila % 2) * 12 + (Math.random() * 8 - 4);
+      const y = 168 - fila * 20 - Math.random() * 8;
+      const r = 11 + Math.random() * 4;
+      const c = colores[i % colores.length];
+      html += `<g class="croqueta" style="animation-delay:${(i * 0.045).toFixed(2)}s"><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r.toFixed(1)}" fill="${c}"/><circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${(r/3).toFixed(1)}" fill="#00000026"/></g>`;
+    }
+    g.innerHTML = html;
+  })();
+
+  pintarProductos();
+  pintarCarrito();
+</script>
+</body>
+</html>
